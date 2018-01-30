@@ -99,5 +99,27 @@ namespace AuNoty
             polaczenie.RunWorkerAsync();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            this.ShowInTaskbar = false;
+            this.Visible = false;
+        }
+
+        private void pokażProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ShowInTaskbar = true;
+            this.Visible = true;
+            notifyIcon1.Visible = false;
+        }
+
+        private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.polaczenie = new System.ComponentModel.BackgroundWorker();
             this.odbieranie = new System.ComponentModel.BackgroundWorker();
             this.txtLog = new System.Windows.Forms.RichTextBox();
             this.txtWysylanie = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pokażProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zakończToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // polaczenie
@@ -58,16 +65,55 @@
             this.txtWysylanie.TabIndex = 1;
             this.txtWysylanie.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(349, 128);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Tray";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pokażProgramToolStripMenuItem,
+            this.zakończToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 74);
+            // 
+            // pokażProgramToolStripMenuItem
+            // 
+            this.pokażProgramToolStripMenuItem.Name = "pokażProgramToolStripMenuItem";
+            this.pokażProgramToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.pokażProgramToolStripMenuItem.Text = "Pokaż program";
+            this.pokażProgramToolStripMenuItem.Click += new System.EventHandler(this.pokażProgramToolStripMenuItem_Click);
+            // 
+            // zakończToolStripMenuItem
+            // 
+            this.zakończToolStripMenuItem.Name = "zakończToolStripMenuItem";
+            this.zakończToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.zakończToolStripMenuItem.Text = "Zakończ";
+            this.zakończToolStripMenuItem.Click += new System.EventHandler(this.zakończToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(459, 342);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtWysylanie);
             this.Controls.Add(this.txtLog);
             this.Name = "Form1";
             this.Text = "AuNoty";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -78,6 +124,11 @@
         private System.ComponentModel.BackgroundWorker odbieranie;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.RichTextBox txtWysylanie;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem pokażProgramToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zakończToolStripMenuItem;
     }
 }
 
