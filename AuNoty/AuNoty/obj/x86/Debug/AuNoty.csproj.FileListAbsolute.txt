@@ -1,0 +1,9 @@
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\bin\Debug\AuNoty.exe
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\bin\Debug\AuNoty.pdb
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\AuNoty.Form1.resources
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\AuNoty.Properties.Resources.resources
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\AuNoty.exe
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Debug\AuNoty.pdb
