@@ -43,7 +43,7 @@ namespace AuNoty
 
         private void polaczenie_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            //txtLog.SelectionFont = new Font(txtLog.Font, FontStyle.Bold);
             wyswietl(txtLog, "Czekam na połaczenie\n");
             listener = new TcpListener(8000);
             listener.Start();
@@ -85,7 +85,13 @@ namespace AuNoty
         {
             string tekst;
             while ((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz)
+            {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
+                MessageBox.Show(tekst);
+
+                w.Write("\rDostałem");
+
+            }
             wyswietl(txtLog, "Rozlaczono\n");
             czypolaczono = false;
             klient.Close();
