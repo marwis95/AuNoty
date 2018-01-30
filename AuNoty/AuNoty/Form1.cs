@@ -121,5 +121,12 @@ namespace AuNoty
             Application.Exit();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2("123");
+            f.ShowDialog();
+            
+        }
+
     }
 }
