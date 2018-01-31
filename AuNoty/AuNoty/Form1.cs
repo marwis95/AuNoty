@@ -87,9 +87,29 @@ namespace AuNoty
             while ((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz)
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
-                MessageBox.Show(tekst);
-
                 w.Write("\rDostałem");
+
+                Form2 f = new Form2(tekst);
+                f.StartPosition = FormStartPosition.Manual;
+                //MessageBox.Show(Screen.PrimaryScreen.WorkingArea.Height.ToString());
+                f.Location = new Point(500, Screen.PrimaryScreen.WorkingArea.Height - f.Height);
+
+                f.Text = "abc";
+                //f.Location = new Point(10, Screen.PrimaryScreen.Bounds.Width - f.Height);
+                
+                
+               
+
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Zamknieto");
+                    w.Write("\rZamknieto");
+
+                }
+                ;
+
+
+                
 
             }
             wyswietl(txtLog, "Rozlaczono\n");

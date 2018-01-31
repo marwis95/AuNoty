@@ -19,7 +19,7 @@ namespace AuNoty
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
