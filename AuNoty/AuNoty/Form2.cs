@@ -21,5 +21,17 @@ namespace AuNoty
         {
 
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            MessageBox.Show(e.CloseReason.ToString());
+
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                this.DialogResult = DialogResult.OK;
+
+            }
+        }
     }
 }

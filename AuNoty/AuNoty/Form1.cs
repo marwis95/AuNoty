@@ -124,7 +124,12 @@ namespace AuNoty
         private void button2_Click(object sender, EventArgs e)
         {
             Form2 f = new Form2("123");
-            f.ShowDialog();
+            if (f.ShowDialog() == DialogResult.OK) {
+                MessageBox.Show("ok");
+            
+            }
+            ;
+            
             
         }
 
