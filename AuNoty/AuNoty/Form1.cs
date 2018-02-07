@@ -37,8 +37,35 @@ namespace AuNoty
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+
+            this.ShowInTaskbar = false;
+            this.Visible = false;
+            this.Location = new Point(500, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+               
             polaczenie.RunWorkerAsync();
             MessageBox.Show("czekam na połaczenie");
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            MessageBox.Show(e.CloseReason.ToString());
+
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                this.DialogResult = DialogResult.OK;
+                e.Cancel = true;
+                notifyIcon1.Visible = true;
+                notifyIcon1.Text = "Minimize";
+                notifyIcon1.Icon = this.Icon;
+                notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+                this.ShowInTaskbar = false;
+                this.Visible = false;
+            }
         }
 
         private void polaczenie_DoWork(object sender, DoWorkEventArgs e)
@@ -89,26 +116,14 @@ namespace AuNoty
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
                 w.Write("\rDostałem");
 
-                Form2 f = new Form2(tekst);
-                f.StartPosition = FormStartPosition.Manual;
-                //MessageBox.Show(Screen.PrimaryScreen.WorkingArea.Height.ToString());
-                f.Location = new Point(500, Screen.PrimaryScreen.WorkingArea.Height - f.Height);
+                this.Invoke((Action)(() => this.ShowInTaskbar = true));
+                this.Invoke((Action)(() => this.Visible = true));
+                this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
-                f.Text = "abc";
-                //f.Location = new Point(10, Screen.PrimaryScreen.Bounds.Width - f.Height);
-                
-                
-               
-
-                if (f.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Zamknieto");
-                    w.Write("\rZamknieto");
-
-                }
-                ;
-
-
+                //this.ShowInTaskbar = true;
+                //this.Visible = true;
+                //notifyIcon1.Visible = false;
+                    MessageBox.Show(tekst);
                 
 
             }
