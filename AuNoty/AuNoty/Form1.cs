@@ -121,6 +121,14 @@ namespace AuNoty
             while ((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz)
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
+
+                MessageBox.Show(tekst.Substring(tekst.IndexOf("<type>") + "<type>".Length, tekst.IndexOf("</type>") - (tekst.IndexOf("<type>") + "<type>".Length)));
+                MessageBox.Show(tekst.Substring(tekst.IndexOf("<caption>") + "<caption>".Length, tekst.IndexOf("</caption>") - (tekst.IndexOf("<caption>") + "<caption>".Length)));
+                MessageBox.Show(tekst.Substring(tekst.IndexOf("<txt>") + "<txt>".Length, tekst.IndexOf("</txt>") - (tekst.IndexOf("<txt>") + "<txt>".Length)));
+                MessageBox.Show(tekst.Substring(tekst.IndexOf("<stime>") + "<stime>".Length, tekst.IndexOf("</stime>") - (tekst.IndexOf("<stime>") + "<stime>".Length)));
+
+
+
                 w.Write("\rDostałem");
 
                 this.Invoke((Action)(() => this.ShowInTaskbar = true));
