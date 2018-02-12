@@ -27,6 +27,12 @@ namespace AuNoty
         private BinaryReader r = null;
         private BinaryWriter w = null;
 
+
+        public string wytnij(String txt, string start, string end)
+        {
+            return txt.Substring(txt.IndexOf(start) + start.Length, txt.IndexOf(end) - (txt.IndexOf(start) + start.Length));
+        }
+
         public void wyswietl(RichTextBox o, string tekst)
         {
             o.Focus();
@@ -122,11 +128,11 @@ namespace AuNoty
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                MessageBox.Show(tekst.Substring(tekst.IndexOf("<type>") + "<type>".Length, tekst.IndexOf("</type>") - (tekst.IndexOf("<type>") + "<type>".Length)));
-                MessageBox.Show(tekst.Substring(tekst.IndexOf("<caption>") + "<caption>".Length, tekst.IndexOf("</caption>") - (tekst.IndexOf("<caption>") + "<caption>".Length)));
-                MessageBox.Show(tekst.Substring(tekst.IndexOf("<txt>") + "<txt>".Length, tekst.IndexOf("</txt>") - (tekst.IndexOf("<txt>") + "<txt>".Length)));
-                MessageBox.Show(tekst.Substring(tekst.IndexOf("<stime>") + "<stime>".Length, tekst.IndexOf("</stime>") - (tekst.IndexOf("<stime>") + "<stime>".Length)));
-
+                MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
+                
 
 
                 w.Write("\rDostałem");
