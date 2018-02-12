@@ -65,6 +65,13 @@ namespace AuNoty
                 notifyIcon1.ContextMenuStrip = contextMenuStrip1;
                 this.ShowInTaskbar = false;
                 this.Visible = false;
+
+
+
+                w.Write("CLOSED");
+
+
+
             }
         }
 
