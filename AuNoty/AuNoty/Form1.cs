@@ -154,6 +154,15 @@ namespace AuNoty
                 this.Invoke((Action)(() => this.Visible = true));
                 this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
+                this.Invoke((Action)(() =>
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)
+                ));
+                counter = 0;
+                this.Invoke((Action)(() => timer1.Interval = 2));
+                this.Invoke((Action)(() => timer1.Start()));
+                
+
+                MessageBox.Show(this.Location.Y.ToString());
                 //this.ShowInTaskbar = true;
                 //this.Visible = true;
                 //notifyIcon1.Visible = false;
