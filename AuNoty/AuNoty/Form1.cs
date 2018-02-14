@@ -32,7 +32,14 @@ namespace AuNoty
 
         public string wytnij(String txt, string start, string end)
         {
-            return txt.Substring(txt.IndexOf(start) + start.Length, txt.IndexOf(end) - (txt.IndexOf(start) + start.Length));
+            try
+            {
+                return txt.Substring(txt.IndexOf(start) + start.Length, txt.IndexOf(end) - (txt.IndexOf(start) + start.Length));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return "err";
+            }
         }
 
         public void wyswietl(RichTextBox o, string tekst)
@@ -134,10 +141,10 @@ namespace AuNoty
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
+                MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
                 
 
 
@@ -178,7 +185,7 @@ namespace AuNoty
             notifyIcon1.Visible = false;
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
-            //MessageBox.Show(this.Location.Y.ToString());
+
             counter = 0;
             timer1.Interval = 2;
             timer1.Start();
