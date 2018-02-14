@@ -27,6 +27,7 @@ namespace AuNoty
         private BinaryReader r = null;
         private BinaryWriter w = null;
         public int counter;
+        public int rem_pos;
 
 
         public string wytnij(String txt, string start, string end)
@@ -53,6 +54,7 @@ namespace AuNoty
             this.Visible = false;
                  
             polaczenie.RunWorkerAsync();
+            pictureBox1.Image = Image.FromFile("alert.gif");
             MessageBox.Show("czekam na połaczenie");
         }
 
@@ -75,6 +77,10 @@ namespace AuNoty
 
 
                 w.Write("CLOSED");
+                //counter = this.Width;
+                //MessageBox.Show(this.Location.Y.ToString());
+                //timer2.Interval = 5;
+                //timer2.Start();
 
 
 
@@ -172,7 +178,8 @@ namespace AuNoty
             notifyIcon1.Visible = false;
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
-
+            //MessageBox.Show(this.Location.Y.ToString());
+            counter = 0;
             timer1.Interval = 2;
             timer1.Start();
         }
@@ -208,6 +215,17 @@ namespace AuNoty
                 timer1.Stop();
             }
 
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (this.Location.Y > 0)
+            {
+                counter--;
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - counter);
+
+            }
 
         }
 
