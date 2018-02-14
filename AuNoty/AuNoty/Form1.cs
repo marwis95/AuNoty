@@ -26,6 +26,7 @@ namespace AuNoty
         private bool czypolaczono = false;
         private BinaryReader r = null;
         private BinaryWriter w = null;
+        public int counter;
 
 
         public string wytnij(String txt, string start, string end)
@@ -50,8 +51,7 @@ namespace AuNoty
 
             this.ShowInTaskbar = false;
             this.Visible = false;
-            this.Location = new Point(500, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
-               
+                 
             polaczenie.RunWorkerAsync();
             MessageBox.Show("czekam na połaczenie");
         }
@@ -106,7 +106,7 @@ namespace AuNoty
             {
                 w.Write(KomunikatySerwera.OK);
                 wyswietl(txtLog, "Połczono\n");
-                MessageBox.Show("Połaczono");
+                //MessageBox.Show("Połaczono");
                 czypolaczono = true;
                 odbieranie.RunWorkerAsync();
             }
@@ -128,10 +128,10 @@ namespace AuNoty
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
+                //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
                 
 
 
@@ -144,7 +144,7 @@ namespace AuNoty
                 //this.ShowInTaskbar = true;
                 //this.Visible = true;
                 //notifyIcon1.Visible = false;
-                    MessageBox.Show(tekst);
+                //    MessageBox.Show(tekst);
                 
 
             }
@@ -170,6 +170,11 @@ namespace AuNoty
             this.ShowInTaskbar = true;
             this.Visible = true;
             notifyIcon1.Visible = false;
+
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
+
+            timer1.Interval = 2;
+            timer1.Start();
         }
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,6 +192,23 @@ namespace AuNoty
             ;
             
             
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
+            {
+                counter++;
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - counter);
+
+            }
+            else
+            {
+                timer1.Stop();
+            }
+
+
         }
 
     }
