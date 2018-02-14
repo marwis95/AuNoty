@@ -18,7 +18,7 @@ namespace AuNoty
         public Form1()
         {
             InitializeComponent();
-            Form1.CheckForIllegalCrossThreadCalls = false;
+           // Form1.CheckForIllegalCrossThreadCalls = false;
         }
 
         private TcpListener listener = null;
@@ -44,9 +44,9 @@ namespace AuNoty
 
         public void wyswietl(RichTextBox o, string tekst)
         {
-            o.Focus();
-            o.AppendText(tekst);
-            o.ScrollToCaret();
+            o.Invoke((Action)(() => o.Focus() ));
+            o.Invoke((Action)(() => o.AppendText(tekst) ));
+            o.Invoke((Action)(() => o.ScrollToCaret() ));
             txtWysylanie.Focus();
         }
 
@@ -155,18 +155,15 @@ namespace AuNoty
                 this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
                 this.Invoke((Action)(() =>
-                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)
-                ));
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
                 counter = 0;
                 this.Invoke((Action)(() => timer1.Interval = 2));
                 this.Invoke((Action)(() => timer1.Start()));
                 
 
-                MessageBox.Show(this.Location.Y.ToString());
-                //this.ShowInTaskbar = true;
-                //this.Visible = true;
-                //notifyIcon1.Visible = false;
-                //    MessageBox.Show(tekst);
+                if(wytnij(tekst, "<caption>", "</caption>") != "err"){
+                this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
+            }
                 
 
             }
