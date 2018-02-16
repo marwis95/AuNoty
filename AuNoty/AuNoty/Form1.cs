@@ -145,8 +145,11 @@ namespace AuNoty
                 MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
                 MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
                 MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
-                
 
+                richTextBox1.Invoke((Action)(() => richTextBox1.Clear() ));
+                wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+
+  
 
                 w.Write("\rDostałem");
 
@@ -239,6 +242,26 @@ namespace AuNoty
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - counter);
 
             }
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //int lines = 1;
+
+           // lines = richTextBox1.Lines.Length;
+
+            //MessageBox.Show("Lines" + lines);
+            //this.richTextBox1.Height = (richTextBox1.Font.Height + 2) * richTextBox1.Lines.Count();
+            //MessageBox.Show(((richTextBox1.Font.Height + 2) * richTextBox1.Lines.Count()).ToString());
+
+            using (Graphics g = CreateGraphics())
+            {
+                richTextBox1.Height = (int)g.MeasureString(richTextBox1.Text,
+                    richTextBox1.Font, richTextBox1.Width).Height;
+                richTextBox1.Height = richTextBox1.Height +  (int)(richTextBox1.Height * 0.2);
+            }
+
 
         }
 
