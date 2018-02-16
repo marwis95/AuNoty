@@ -11,6 +11,8 @@ using System.Net.Sockets;
 using System.IO;
 using komunikaty;
 
+
+
 namespace AuNoty
 {
     public partial class Form1 : Form
@@ -28,6 +30,8 @@ namespace AuNoty
         private BinaryWriter w = null;
         public int counter;
         public int rem_pos;
+        public Color color = System.Drawing.ColorTranslator.FromHtml("#000000");
+        public String strColor;
 
 
         public string wytnij(String txt, string start, string end)
@@ -52,6 +56,11 @@ namespace AuNoty
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Color color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
+            //label1.Focus();
+            this.BackColor = color;
+            richTextBox1.BackColor = color;
+
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
             notifyIcon1.Icon = this.Icon;
@@ -59,9 +68,9 @@ namespace AuNoty
 
             this.ShowInTaskbar = false;
             this.Visible = false;
-                 
+            
             polaczenie.RunWorkerAsync();
-            pictureBox1.Image = Image.FromFile("alert.gif");
+            pictureBox1.Image = Image.FromFile("alert.png");
             MessageBox.Show("czekam na połaczenie");
         }
 
@@ -84,10 +93,6 @@ namespace AuNoty
 
 
                 w.Write("CLOSED");
-                //counter = this.Width;
-                //MessageBox.Show(this.Location.Y.ToString());
-                //timer2.Interval = 5;
-                //timer2.Start();
 
 
 
@@ -146,13 +151,18 @@ namespace AuNoty
                 MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
                 MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
 
+                strColor = "#29ba7b";
+
                 richTextBox1.Invoke((Action)(() => richTextBox1.Clear() ));
                 wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+                
 
   
 
                 w.Write("\rDostałem");
 
+                color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
+                this.Invoke((Action)(() => this.BackColor = color));
                 this.Invoke((Action)(() => this.ShowInTaskbar = true));
                 this.Invoke((Action)(() => this.Visible = true));
                 this.Invoke((Action)(() => notifyIcon1.Visible = false));
@@ -166,7 +176,11 @@ namespace AuNoty
 
                 if(wytnij(tekst, "<caption>", "</caption>") != "err"){
                 this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
-            }
+
+
+
+                
+                }
                 
 
             }
@@ -247,14 +261,7 @@ namespace AuNoty
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            //int lines = 1;
-
-           // lines = richTextBox1.Lines.Length;
-
-            //MessageBox.Show("Lines" + lines);
-            //this.richTextBox1.Height = (richTextBox1.Font.Height + 2) * richTextBox1.Lines.Count();
-            //MessageBox.Show(((richTextBox1.Font.Height + 2) * richTextBox1.Lines.Count()).ToString());
-
+            
             using (Graphics g = CreateGraphics())
             {
                 richTextBox1.Height = (int)g.MeasureString(richTextBox1.Text,
@@ -262,7 +269,30 @@ namespace AuNoty
                 richTextBox1.Height = richTextBox1.Height +  (int)(richTextBox1.Height * 0.2);
             }
 
+            richTextBox1.SelectionStart = 0;
+            richTextBox1.SelectAll();
 
+
+            richTextBox1.SelectionColor = Color.White;
+
+            richTextBox1.DeselectAll();
+
+            color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
+            richTextBox1.BackColor = color;
+            
+
+            this.Height = richTextBox1.Height + 90;
+
+     
+
+            pictureBox1.Location = new Point(pictureBox1.Location.X, (int)(0.5 * this.Height) - pictureBox1.Height);
+
+
+        }
+
+        private void richTextBox1_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
         }
 
     }
