@@ -57,8 +57,8 @@ namespace AuNoty
         private void Form1_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.BackColor = color;
-            richTextBox1.BackColor = color;
+            //this.BackColor = color;
+            //richTextBox1.BackColor = color;
 
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
@@ -69,7 +69,7 @@ namespace AuNoty
             this.Visible = false;
             
             polaczenie.RunWorkerAsync();
-            pictureBox1.Image = Image.FromFile("alert.png");
+            //pictureBox1.Image = Image.FromFile("error.png");
             MessageBox.Show("czekam na połaczenie");
         }
 
@@ -177,7 +177,37 @@ namespace AuNoty
                 //this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
                     textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
                 }
-                
+
+                if (wytnij(tekst, "<type>", "</type>") != "err")
+                {
+                    if (wytnij(tekst, "<type>", "</type>") == "info")
+                    {
+                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("info.png")));
+                        color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
+                    }
+
+                    if (wytnij(tekst, "<type>", "</type>") == "error")
+                    {
+                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("error.png")));
+                        color = System.Drawing.ColorTranslator.FromHtml("#ca2121");
+                    }
+
+                    if (wytnij(tekst, "<type>", "</type>") == "warning")
+                    {
+                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("warning.png")));
+                        color = System.Drawing.ColorTranslator.FromHtml("#ce812e");
+                    }
+
+                    if (wytnij(tekst, "<type>", "</type>") == "question")
+                    {
+                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("question.png")));
+                        color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
+                    }
+
+                    richTextBox1.Invoke((Action)(() => richTextBox1.BackColor = color));
+                    this.Invoke((Action)(() => this.BackColor = color));
+                }
+
 
             }
             wyswietl(txtLog, "Rozlaczono\n");
@@ -273,9 +303,8 @@ namespace AuNoty
 
             richTextBox1.DeselectAll();
 
-            color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
-            richTextBox1.BackColor = color;
-            
+
+            //richTextBox1.BackColor = color;
 
             this.Height = richTextBox1.Height + 90;
 
@@ -307,6 +336,7 @@ namespace AuNoty
 
             w.Write("ZAMKNIETO");
         }
-
+         
     }
 }
+   
