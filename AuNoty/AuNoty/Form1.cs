@@ -158,7 +158,7 @@ namespace AuNoty
 
   
 
-                w.Write("\rDostałem");
+                w.Write("DOSTALEM");
 
                 color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
                 this.Invoke((Action)(() => this.BackColor = color));
@@ -174,11 +174,8 @@ namespace AuNoty
                 
 
                 if(wytnij(tekst, "<caption>", "</caption>") != "err"){
-                this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
-
-
-
-                
+                //this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
+                    textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
                 }
                 
 
@@ -282,8 +279,8 @@ namespace AuNoty
 
             this.Height = richTextBox1.Height + 90;
 
-     
 
+            richTextBox1.Location = new Point(richTextBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * richTextBox1.Height)) + 10);
             pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
 
 
@@ -292,6 +289,23 @@ namespace AuNoty
         private void richTextBox1_Enter(object sender, EventArgs e)
         {
             label1.Focus();
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            label1.Focus();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            this.ShowInTaskbar = false;
+            this.Visible = false;
+
+            w.Write("ZAMKNIETO");
         }
 
     }
