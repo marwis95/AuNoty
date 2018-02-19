@@ -56,8 +56,7 @@ namespace AuNoty
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Color color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
-            //label1.Focus();
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.BackColor = color;
             richTextBox1.BackColor = color;
 
@@ -285,7 +284,7 @@ namespace AuNoty
 
      
 
-            pictureBox1.Location = new Point(pictureBox1.Location.X, (int)(0.5 * this.Height) - pictureBox1.Height);
+            pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
 
 
         }
