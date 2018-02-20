@@ -209,6 +209,14 @@ namespace AuNoty
                 }
 
 
+                if (wytnij(tekst, "<stime>", "</stime>") != "0")
+                {
+                    int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
+                    MessageBox.Show(time.ToString());
+                    this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
+                    this.Invoke((Action)(() => this.timer2.Start()));
+                }
+
             }
             wyswietl(txtLog, "Rozlaczono\n");
             czypolaczono = false;
@@ -276,12 +284,16 @@ namespace AuNoty
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (this.Location.Y > 0)
-            {
-                counter--;
-                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - counter);
+           // MessageBox.Show("timer");
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            this.ShowInTaskbar = false;
+            this.Visible = false;
 
-            }
+            w.Write("ZAMKNIETO");
+            timer2.Stop();
 
         }
 
