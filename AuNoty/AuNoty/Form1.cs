@@ -117,8 +117,11 @@ namespace AuNoty
             klient = listener.AcceptTcpClient();
             wyswietl(txtLog, "Zarządano połączenia\n");
             NetworkStream stream = klient.GetStream();
+            //MessageBox.Show(stream.ReadTimeout());
             w = new BinaryWriter(stream);
             r = new BinaryReader(stream);
+            
+            //MessageBox.Show(r.ReadString());
             if (r.ReadString() == KomunikatyKlienta.Zadaj)
             {
                 w.Write(KomunikatySerwera.OK);
@@ -154,11 +157,17 @@ namespace AuNoty
 
                 richTextBox1.Invoke((Action)(() => richTextBox1.Clear() ));
                 wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+
+
+                if (
+                    (wytnij(tekst, "<type>", "</type>") != "err") &&
+                    (wytnij(tekst, "<caption>", "</caption>") != "err") &&
+                    (wytnij(tekst, "<txt>", "</txt>") != "err") &&
+                    (wytnij(tekst, "<stime>", "</stime>") != "err"))
+                    w.Write("<msg>ok</msg>");
+                else
+                    w.Write("<msg>nok</msg>" + tekst);
                 
-
-  
-
-                w.Write("DOSTALEM");
 
                 color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
                 this.Invoke((Action)(() => this.BackColor = color));
@@ -180,25 +189,25 @@ namespace AuNoty
 
                 if (wytnij(tekst, "<type>", "</type>") != "err")
                 {
-                    if (wytnij(tekst, "<type>", "</type>") == "info")
+                    if (wytnij(tekst, "<type>", "</type>") == "inf")
                     {
                         pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("info.png")));
                         color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
                     }
 
-                    if (wytnij(tekst, "<type>", "</type>") == "error")
+                    if (wytnij(tekst, "<type>", "</type>") == "err")
                     {
                         pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("error.png")));
                         color = System.Drawing.ColorTranslator.FromHtml("#ca2121");
                     }
 
-                    if (wytnij(tekst, "<type>", "</type>") == "warning")
+                    if (wytnij(tekst, "<type>", "</type>") == "war")
                     {
                         pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("warning.png")));
                         color = System.Drawing.ColorTranslator.FromHtml("#ce812e");
                     }
 
-                    if (wytnij(tekst, "<type>", "</type>") == "question")
+                    if (wytnij(tekst, "<type>", "</type>") == "que")
                     {
                         pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("question.png")));
                         color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
