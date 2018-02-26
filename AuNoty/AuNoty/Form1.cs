@@ -21,6 +21,7 @@ namespace AuNoty
         {
             InitializeComponent();
            // Form1.CheckForIllegalCrossThreadCalls = false;
+           
         }
 
         private TcpListener listener = null;
@@ -45,6 +46,8 @@ namespace AuNoty
                 return "err";
             }
         }
+
+
 
         public void wyswietl(RichTextBox o, string tekst)
         {
@@ -356,6 +359,25 @@ namespace AuNoty
             this.Visible = false;
 
             w.Write("ZAMKNIETO");
+        }
+
+        private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (klient.Connected == true)
+                {
+                    MessageBox.Show("Connected");
+                }
+                else
+                {
+                    MessageBox.Show("Disconnected");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Disconnected");
+            }
         }
          
     }
