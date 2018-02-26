@@ -47,6 +47,24 @@ namespace AuNoty
             }
         }
 
+        public bool checkConn(TcpClient k)
+        {
+            try
+            {
+                if (klient.Connected == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+        }
 
 
         public void wyswietl(RichTextBox o, string tekst)
@@ -358,12 +376,14 @@ namespace AuNoty
             this.ShowInTaskbar = false;
             this.Visible = false;
 
-            w.Write("ZAMKNIETO");
+            w.Write("<msg>closed</msg>");
+            timer2.Stop();
         }
 
         private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            MessageBox.Show(checkConn(klient).ToString());
+            /*try
             {
                 if (klient.Connected == true)
                 {
@@ -377,7 +397,9 @@ namespace AuNoty
             catch (NullReferenceException)
             {
                 MessageBox.Show("Disconnected");
-            }
+            }*/
+
+
         }
          
     }

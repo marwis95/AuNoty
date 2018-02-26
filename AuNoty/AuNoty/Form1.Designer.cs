@@ -99,8 +99,8 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pokażProgramToolStripMenuItem,
-            this.zakończToolStripMenuItem,
-            this.sprawdzToolStripMenuItem});
+            this.sprawdzToolStripMenuItem,
+            this.zakończToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(180, 98);
             // 
@@ -199,7 +199,7 @@
             // 
             this.sprawdzToolStripMenuItem.Name = "sprawdzToolStripMenuItem";
             this.sprawdzToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
-            this.sprawdzToolStripMenuItem.Text = "Sprawdz";
+            this.sprawdzToolStripMenuItem.Text = "Status";
             this.sprawdzToolStripMenuItem.Click += new System.EventHandler(this.sprawdzToolStripMenuItem_Click);
             // 
             // Form1
