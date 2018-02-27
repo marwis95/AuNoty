@@ -19,9 +19,7 @@ namespace AuNoty
     {
         public Form1()
         {
-            InitializeComponent();
-           // Form1.CheckForIllegalCrossThreadCalls = false;
-           
+            InitializeComponent();         
         }
 
         private TcpListener listener = null;
@@ -33,6 +31,7 @@ namespace AuNoty
         public int rem_pos;
         public Color color = System.Drawing.ColorTranslator.FromHtml("#000000");
         public String strColor;
+        public bool checkMessage = false;
 
 
         public string wytnij(String txt, string start, string end)
@@ -78,19 +77,15 @@ namespace AuNoty
         private void Form1_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            //this.BackColor = color;
-            //richTextBox1.BackColor = color;
 
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
-
             this.ShowInTaskbar = false;
             this.Visible = false;
             
             polaczenie.RunWorkerAsync();
-            //pictureBox1.Image = Image.FromFile("error.png");
             MessageBox.Show("czekam na połaczenie");
         }
 
@@ -138,16 +133,13 @@ namespace AuNoty
             klient = listener.AcceptTcpClient();
             wyswietl(txtLog, "Zarządano połączenia\n");
             NetworkStream stream = klient.GetStream();
-            //MessageBox.Show(stream.ReadTimeout());
             w = new BinaryWriter(stream);
             r = new BinaryReader(stream);
             
-            //MessageBox.Show(r.ReadString());
             if (r.ReadString() == KomunikatyKlienta.Zadaj)
             {
                 w.Write(KomunikatySerwera.OK);
                 wyswietl(txtLog, "Połczono\n");
-                //MessageBox.Show("Połaczono");
                 czypolaczono = true;
                 odbieranie.RunWorkerAsync();
             }
@@ -165,7 +157,7 @@ namespace AuNoty
         private void odbieranie_DoWork(object sender, DoWorkEventArgs e)
         {
             string tekst;
-            while ((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz)
+            while (((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz) && (checkConn(klient) == true))
             {
                 wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
@@ -204,7 +196,6 @@ namespace AuNoty
                 
 
                 if(wytnij(tekst, "<caption>", "</caption>") != "err"){
-                //this.Invoke((Action)(() => this.Text = wytnij(tekst, "<caption>", "</caption>")));
                     textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
                 }
 
@@ -314,16 +305,18 @@ namespace AuNoty
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-           // MessageBox.Show("timer");
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
             this.Visible = false;
-
-            w.Write("ZAMKNIETO");
             timer2.Stop();
+
+            if (checkConn(klient) == true)
+            {
+                w.Write("<msg>closed</msg>");
+            }
 
         }
 
@@ -337,20 +330,14 @@ namespace AuNoty
                 richTextBox1.Height = richTextBox1.Height +  (int)(richTextBox1.Height * 0.2);
             }
 
+
             richTextBox1.SelectionStart = 0;
             richTextBox1.SelectAll();
-
-
             richTextBox1.SelectionColor = Color.White;
-
             richTextBox1.DeselectAll();
 
 
-            //richTextBox1.BackColor = color;
-
             this.Height = richTextBox1.Height + 90;
-
-
             richTextBox1.Location = new Point(richTextBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * richTextBox1.Height)) + 10);
             pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
 
@@ -375,31 +362,17 @@ namespace AuNoty
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
             this.Visible = false;
-
-            w.Write("<msg>closed</msg>");
             timer2.Stop();
+
+            if (checkConn(klient) == true)
+            {
+                w.Write("<msg>closed</msg>");
+            }
         }
 
         private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(checkConn(klient).ToString());
-            /*try
-            {
-                if (klient.Connected == true)
-                {
-                    MessageBox.Show("Connected");
-                }
-                else
-                {
-                    MessageBox.Show("Disconnected");
-                }
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Disconnected");
-            }*/
-
-
         }
          
     }
