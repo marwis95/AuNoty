@@ -157,86 +157,94 @@ namespace AuNoty
         private void odbieranie_DoWork(object sender, DoWorkEventArgs e)
         {
             string tekst;
-            while (((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz) && (checkConn(klient) == true))
+            try
             {
-                wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
-
-                MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
-
-                strColor = "#29ba7b";
-
-                richTextBox1.Invoke((Action)(() => richTextBox1.Clear() ));
-                wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
-
-
-                if (
-                    (wytnij(tekst, "<type>", "</type>") != "err") &&
-                    (wytnij(tekst, "<caption>", "</caption>") != "err") &&
-                    (wytnij(tekst, "<txt>", "</txt>") != "err") &&
-                    (wytnij(tekst, "<stime>", "</stime>") != "err"))
-                    w.Write("<msg>ok</msg>");
-                else
-                    w.Write("<msg>nok</msg>" + tekst);
-                
-
-                color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
-                this.Invoke((Action)(() => this.BackColor = color));
-                this.Invoke((Action)(() => this.ShowInTaskbar = true));
-                this.Invoke((Action)(() => this.Visible = true));
-                this.Invoke((Action)(() => notifyIcon1.Visible = false));
-
-                this.Invoke((Action)(() =>
-                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
-                counter = 0;
-                this.Invoke((Action)(() => timer1.Interval = 2));
-                this.Invoke((Action)(() => timer1.Start()));
-                
-
-                if(wytnij(tekst, "<caption>", "</caption>") != "err"){
-                    textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
-                }
-
-                if (wytnij(tekst, "<type>", "</type>") != "err")
+                while (((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz) && (checkConn(klient) == true))
                 {
-                    if (wytnij(tekst, "<type>", "</type>") == "inf")
-                    {
-                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("info.png")));
-                        color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
-                    }
+                    wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                    if (wytnij(tekst, "<type>", "</type>") == "err")
-                    {
-                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("error.png")));
-                        color = System.Drawing.ColorTranslator.FromHtml("#ca2121");
-                    }
+                    MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                    MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                    MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                    MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
 
-                    if (wytnij(tekst, "<type>", "</type>") == "war")
-                    {
-                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("warning.png")));
-                        color = System.Drawing.ColorTranslator.FromHtml("#ce812e");
-                    }
+                    strColor = "#29ba7b";
 
-                    if (wytnij(tekst, "<type>", "</type>") == "que")
-                    {
-                        pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("question.png")));
-                        color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
-                    }
+                    richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
+                    wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
 
-                    richTextBox1.Invoke((Action)(() => richTextBox1.BackColor = color));
+
+                    if (
+                        (wytnij(tekst, "<type>", "</type>") != "err") &&
+                        (wytnij(tekst, "<caption>", "</caption>") != "err") &&
+                        (wytnij(tekst, "<txt>", "</txt>") != "err") &&
+                        (wytnij(tekst, "<stime>", "</stime>") != "err"))
+                        w.Write("<msg>ok</msg>");
+                    else
+                        w.Write("<msg>nok</msg>" + tekst);
+
+
+                    color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
                     this.Invoke((Action)(() => this.BackColor = color));
-                }
+                    this.Invoke((Action)(() => this.ShowInTaskbar = true));
+                    this.Invoke((Action)(() => this.Visible = true));
+                    this.Invoke((Action)(() => notifyIcon1.Visible = false));
+
+                    this.Invoke((Action)(() =>
+                    this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
+                    counter = 0;
+                    this.Invoke((Action)(() => timer1.Interval = 2));
+                    this.Invoke((Action)(() => timer1.Start()));
 
 
-                if (wytnij(tekst, "<stime>", "</stime>") != "0")
-                {
-                    int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
-                    MessageBox.Show(time.ToString());
-                    this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
-                    this.Invoke((Action)(() => this.timer2.Start()));
+                    if (wytnij(tekst, "<caption>", "</caption>") != "err")
+                    {
+                        textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
+                    }
+
+                    if (wytnij(tekst, "<type>", "</type>") != "err")
+                    {
+                        if (wytnij(tekst, "<type>", "</type>") == "inf")
+                        {
+                            pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("info.png")));
+                            color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
+                        }
+
+                        if (wytnij(tekst, "<type>", "</type>") == "err")
+                        {
+                            pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("error.png")));
+                            color = System.Drawing.ColorTranslator.FromHtml("#ca2121");
+                        }
+
+                        if (wytnij(tekst, "<type>", "</type>") == "war")
+                        {
+                            pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("warning.png")));
+                            color = System.Drawing.ColorTranslator.FromHtml("#ce812e");
+                        }
+
+                        if (wytnij(tekst, "<type>", "</type>") == "que")
+                        {
+                            pictureBox1.Invoke((Action)(() => pictureBox1.Image = Image.FromFile("question.png")));
+                            color = System.Drawing.ColorTranslator.FromHtml("#2e79b4");
+                        }
+
+                        richTextBox1.Invoke((Action)(() => richTextBox1.BackColor = color));
+                        this.Invoke((Action)(() => this.BackColor = color));
+                    }
+
+
+                    if (wytnij(tekst, "<stime>", "</stime>") != "0")
+                    {
+                        int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
+                        MessageBox.Show(time.ToString());
+                        this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
+                        this.Invoke((Action)(() => this.timer2.Start()));
+                    }
+
                 }
+            }
+            catch (IOException a)
+            {
 
             }
             wyswietl(txtLog, "Rozlaczono\n");
