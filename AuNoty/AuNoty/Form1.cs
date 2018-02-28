@@ -10,16 +10,61 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using komunikaty;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Collections;
 
 
 
 namespace AuNoty
 {
+    public enum ClickType
+    {
+        click = 0,
+        rightClick = 1,
+        doubleClick = 2,
+        SendKeys = 3
+    }
     public partial class Form1 : Form
     {
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+
+        [DllImport("user32")]
+        public static extern int SetCursorPos(int x, int y);
+
+        #region Fields
+        private const int MOUSEEVENTF_MOVE = 0x0001; /* mouse move */
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002; /* left button down */
+        private const int MOUSEEVENTF_LEFTUP = 0x0004; /* left button up */
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008; /* right button down */
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010; /* right button up */
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020; /* middle button down */
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040; /* middle button up */
+        private const int MOUSEEVENTF_XDOWN = 0x0080; /* x button down */
+        private const int MOUSEEVENTF_XUP = 0x0100; /* x button down */
+        private const int MOUSEEVENTF_WHEEL = 0x0800; /* wheel button rolled */
+        private const int MOUSEEVENTF_VIRTUALDESK = 0x4000; /* map to entire virtual desktop */
+        private const int MOUSEEVENTF_ABSOLUTE = 0x8000; /* absolute move */
+
+        private SynchronizationContext context = null;
+        private DateTime start, end;
+        private bool first = true;
+        private List<ActionEntry> actions;
+        private Thread runActionThread;
+        private bool byTextEntry;
+        private Hashtable schedualeList;
+        #endregion
+
+
+
         public Form1()
         {
-            InitializeComponent();         
+            InitializeComponent();
+            context = SynchronizationContext.Current;
+            actions = new List<ActionEntry>();
+            schedualeList = new Hashtable();
         }
 
         private TcpListener listener = null;
@@ -33,6 +78,34 @@ namespace AuNoty
         public String strColor;
         public bool checkMessage = false;
 
+
+        private void WorkClick(object state)
+        {
+            this.context.Send(new SendOrPostCallback(delegate(object _state)
+            {
+                ActionEntry action = state as ActionEntry;
+                SetCursorPos(action.X, action.Y);
+                Thread.Sleep(100);
+                if (action.Type.Equals(ClickType.click))
+                {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                }
+                else if (action.Type.Equals(ClickType.doubleClick))
+                {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                    Thread.Sleep(100);
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                }
+                else //if (action.Type.Equals(ClickType.rightClick))
+                {
+                    mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
+                    mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+                }
+            }), state);
+        }
 
         public string wytnij(String txt, string start, string end)
         {
@@ -197,6 +270,8 @@ namespace AuNoty
                     this.Invoke((Action)(() => timer1.Interval = 2));
                     this.Invoke((Action)(() => timer1.Start()));
 
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
                     if (wytnij(tekst, "<caption>", "</caption>") != "err")
                     {
