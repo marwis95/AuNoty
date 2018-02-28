@@ -77,6 +77,7 @@ namespace AuNoty
         private void Form1_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            
 
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
@@ -163,10 +164,10 @@ namespace AuNoty
                 {
                     wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                    MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                    MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                    MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                    MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
+                    //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                    //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                   // MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
 
                     strColor = "#29ba7b";
 
@@ -186,7 +187,7 @@ namespace AuNoty
 
                     color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
                     this.Invoke((Action)(() => this.BackColor = color));
-                    this.Invoke((Action)(() => this.ShowInTaskbar = true));
+                    this.Invoke((Action)(() => this.TopMost = true));
                     this.Invoke((Action)(() => this.Visible = true));
                     this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
@@ -236,7 +237,7 @@ namespace AuNoty
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")
                     {
                         int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
-                        MessageBox.Show(time.ToString());
+                        //MessageBox.Show(time.ToString());
                         this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
                         this.Invoke((Action)(() => this.timer2.Start()));
                     }
@@ -266,7 +267,8 @@ namespace AuNoty
 
         private void pokażProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.ShowInTaskbar = true;
+            //this.ShowInTaskbar = true;
+            this.TopMost = true;
             this.Visible = true;
             notifyIcon1.Visible = false;
 
@@ -313,6 +315,7 @@ namespace AuNoty
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            this.TopMost = true;
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Minimize";
             notifyIcon1.Icon = this.Icon;
@@ -380,7 +383,15 @@ namespace AuNoty
 
         private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(checkConn(klient).ToString());
+            //MessageBox.Show(checkConn(klient).ToString());
+            if (checkConn(klient) == true)
+            {
+                MessageBox.Show("Connected");
+            }
+            else
+            {
+                MessageBox.Show("Disconnected");
+            }
         }
          
     }

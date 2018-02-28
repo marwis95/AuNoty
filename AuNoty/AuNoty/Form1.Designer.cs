@@ -38,6 +38,7 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pokażProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sprawdzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zakończToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -47,7 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.sprawdzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -102,20 +102,27 @@
             this.sprawdzToolStripMenuItem,
             this.zakończToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 98);
             // 
             // pokażProgramToolStripMenuItem
             // 
             this.pokażProgramToolStripMenuItem.Name = "pokażProgramToolStripMenuItem";
-            this.pokażProgramToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
-            this.pokażProgramToolStripMenuItem.Text = "Pokaż program";
+            this.pokażProgramToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.pokażProgramToolStripMenuItem.Text = "Last Message";
             this.pokażProgramToolStripMenuItem.Click += new System.EventHandler(this.pokażProgramToolStripMenuItem_Click);
+            // 
+            // sprawdzToolStripMenuItem
+            // 
+            this.sprawdzToolStripMenuItem.Name = "sprawdzToolStripMenuItem";
+            this.sprawdzToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.sprawdzToolStripMenuItem.Text = "Status";
+            this.sprawdzToolStripMenuItem.Click += new System.EventHandler(this.sprawdzToolStripMenuItem_Click);
             // 
             // zakończToolStripMenuItem
             // 
             this.zakończToolStripMenuItem.Name = "zakończToolStripMenuItem";
-            this.zakończToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
-            this.zakończToolStripMenuItem.Text = "Zakończ";
+            this.zakończToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.zakończToolStripMenuItem.Text = "Exit";
             this.zakończToolStripMenuItem.Click += new System.EventHandler(this.zakończToolStripMenuItem_Click);
             // 
             // button2
@@ -194,13 +201,6 @@
             this.button3.Text = "X";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // sprawdzToolStripMenuItem
-            // 
-            this.sprawdzToolStripMenuItem.Name = "sprawdzToolStripMenuItem";
-            this.sprawdzToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
-            this.sprawdzToolStripMenuItem.Text = "Status";
-            this.sprawdzToolStripMenuItem.Click += new System.EventHandler(this.sprawdzToolStripMenuItem_Click);
             // 
             // Form1
             // 
