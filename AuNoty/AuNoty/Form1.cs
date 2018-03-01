@@ -153,7 +153,7 @@ namespace AuNoty
             
 
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -166,14 +166,14 @@ namespace AuNoty
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            MessageBox.Show(e.CloseReason.ToString());
+            //MessageBox.Show(e.CloseReason.ToString());
 
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 this.DialogResult = DialogResult.OK;
                 e.Cancel = true;
                 notifyIcon1.Visible = true;
-                notifyIcon1.Text = "Minimize";
+                notifyIcon1.Text = "AuNoty";
                 notifyIcon1.Icon = this.Icon;
                 notifyIcon1.ContextMenuStrip = contextMenuStrip1;
                 this.ShowInTaskbar = false;
@@ -235,11 +235,20 @@ namespace AuNoty
             {
                 while (((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz) && (checkConn(klient) == true))
                 {
+                    System.Text.Encoding utf_8 = System.Text.Encoding.UTF8;
+                    string s_unicode = tekst;
+                    byte[] utf8Bytes = System.Text.Encoding.UTF8.GetBytes(s_unicode);
+                    string s_unicode2 = System.Text.Encoding.UTF8.GetString(utf8Bytes);
+
+                    tekst=s_unicode2;
+
+
+
                     wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
                     //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
                     //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                    MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
                    // MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
 
                     strColor = "#29ba7b";
@@ -328,12 +337,19 @@ namespace AuNoty
             klient.Close();
             listener.Stop();
             polaczenie.RunWorkerAsync();
+
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "AuNoty";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            this.Invoke((Action)(() => this.ShowInTaskbar = false));
+            this.Invoke((Action)(() =>  this.Visible = false));
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -344,7 +360,7 @@ namespace AuNoty
         {
             //this.ShowInTaskbar = true;
             this.TopMost = true;
-            this.Visible = true;
+            //this.Visible = true;
             notifyIcon1.Visible = false;
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
@@ -373,7 +389,7 @@ namespace AuNoty
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            this.Visible = true;
             if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
             {
                 counter++;
@@ -392,7 +408,7 @@ namespace AuNoty
         {
             this.TopMost = true;
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -443,7 +459,7 @@ namespace AuNoty
         private void button3_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "Minimize";
+            notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
