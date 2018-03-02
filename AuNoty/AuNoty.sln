@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuNoty", "AuNoty\AuNoty.csproj", "{4DC252E0-EFBD-4F2C-8AF3-1B70308471A5}"
 EndProject
+Project("{3B84926E-F739-4306-9FA2-3627D2E8779A}") = "Setup", "Setup\Setup.innoproj", "{9958ADE3-2374-4639-831A-ECA8256C0B86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,6 +15,10 @@ Global
 		{4DC252E0-EFBD-4F2C-8AF3-1B70308471A5}.Debug|x86.Build.0 = Debug|x86
 		{4DC252E0-EFBD-4F2C-8AF3-1B70308471A5}.Release|x86.ActiveCfg = Release|x86
 		{4DC252E0-EFBD-4F2C-8AF3-1B70308471A5}.Release|x86.Build.0 = Release|x86
+		{9958ADE3-2374-4639-831A-ECA8256C0B86}.Debug|x86.ActiveCfg = Debug|x86
+		{9958ADE3-2374-4639-831A-ECA8256C0B86}.Debug|x86.Build.0 = Debug|x86
+		{9958ADE3-2374-4639-831A-ECA8256C0B86}.Release|x86.ActiveCfg = Release|x86
+		{9958ADE3-2374-4639-831A-ECA8256C0B86}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
