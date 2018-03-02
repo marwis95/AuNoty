@@ -248,7 +248,7 @@ namespace AuNoty
 
                     //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
                     //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                    MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
                    // MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
 
                     strColor = "#29ba7b";
@@ -317,6 +317,7 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.BackColor = color));
                     }
 
+                    pokażProgramToolStripMenuItem.Enabled = true;
 
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")
                     {

@@ -102,10 +102,11 @@
             this.sprawdzToolStripMenuItem,
             this.zakończToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 98);
             // 
             // pokażProgramToolStripMenuItem
             // 
+            this.pokażProgramToolStripMenuItem.Enabled = false;
             this.pokażProgramToolStripMenuItem.Name = "pokażProgramToolStripMenuItem";
             this.pokażProgramToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.pokażProgramToolStripMenuItem.Text = "Last Message";
