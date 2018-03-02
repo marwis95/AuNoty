@@ -19,7 +19,8 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\Aumatic/AuNoty
+DefaultDirName={pf}\Aumatic\AuNoty
+DefaultGroupName=Aumatic\AuNoty
 DisableProgramGroupPage=yes
 OutputBaseFilename=setup
 Compression=lzma
@@ -41,8 +42,7 @@ Source: "..\AuNoty\bin\Release\question.png"; DestDir: "{app}"
 
 
 [Icons]
-Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{group}\AuNoty"; Filename: "{app}\AuNoty.exe"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
