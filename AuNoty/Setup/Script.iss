@@ -5,13 +5,13 @@
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Aumatic"
 #define MyAppURL "http://aumatic.com/"
-#define MyAppExeName "AuNoty.exe"
+#define MyAppExeName "MyProg.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{C03D3DEF-67CD-4E79-91A7-565F07E12CF6}
+AppId={{9AB7D14E-42B2-4C5D-B36E-1623D8733888}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -29,21 +29,19 @@ SolidCompression=yes
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
-[Tasks]
-Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-
 [Files]
-Source: "Script.iss"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\AuNoty.exe"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\error.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\info.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\warning.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\question.png"; DestDir: "{app}"
-
+; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\AuNoty"; Filename: "{app}\AuNoty.exe"
 
-[Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
+[Registry]
+Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletevalue
+
 

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>1.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9958ade3-2374-4639-831a-eca8256c0b86}</ProjectGuid>
+    <ProjectGuid>e0193c72-247c-4c5e-92b0-7f83d6f99a15</ProjectGuid>
     <AssemblyName>Setup</AssemblyName>
     <Name>Setup</Name>
     <RootNamespace>Setup</RootNamespace>
