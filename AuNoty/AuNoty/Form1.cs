@@ -77,6 +77,7 @@ namespace AuNoty
         public Color color = System.Drawing.ColorTranslator.FromHtml("#000000");
         public String strColor;
         public bool checkMessage = false;
+        public bool visible = false;
 
 
         private void WorkClick(object state)
@@ -279,6 +280,7 @@ namespace AuNoty
                     this.Invoke((Action)(() => timer1.Interval = 2));
                     this.Invoke((Action)(() => timer1.Start()));
 
+
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
@@ -359,6 +361,7 @@ namespace AuNoty
 
         private void pokażProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            visible = true;
             //this.ShowInTaskbar = true;
             this.TopMost = true;
             //this.Visible = true;
@@ -391,6 +394,10 @@ namespace AuNoty
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Visible = true;
+            if (visible == true)
+            {
+                counter = this.Height -1 ;
+            }
             if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
             {
                 counter++;
@@ -400,6 +407,7 @@ namespace AuNoty
             else
             {
                 timer1.Stop();
+                visible = true;
             }
 
 
@@ -414,6 +422,7 @@ namespace AuNoty
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
             this.Visible = false;
+            visible = false;
             timer2.Stop();
 
             if (checkConn(klient) == true)
