@@ -247,11 +247,6 @@ namespace AuNoty
 
                     wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                    //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                    //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                   // MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
-
                     strColor = "#29ba7b";
 
                     richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
@@ -325,6 +320,7 @@ namespace AuNoty
                     {
                         int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
                         //MessageBox.Show(time.ToString());
+                        this.Invoke((Action)(() => this.timer2.Stop()));
                         this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
                         this.Invoke((Action)(() => this.timer2.Start()));
                     }

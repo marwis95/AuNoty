@@ -72,7 +72,7 @@ Name: "{group}\AuNoty"; Filename: "{app}\AuNoty.exe"
 
 
 [Registry]
-Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletevalue
+;Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletevalue
 
 
  
