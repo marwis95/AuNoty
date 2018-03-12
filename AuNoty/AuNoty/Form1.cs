@@ -116,7 +116,7 @@ namespace AuNoty
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return "err";
+                return "error";
             }
         }
 
@@ -161,7 +161,7 @@ namespace AuNoty
             this.Visible = false;
             
             polaczenie.RunWorkerAsync();
-            MessageBox.Show("czekam na połaczenie");
+            //MessageBox.Show("czekam na połaczenie");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -247,6 +247,11 @@ namespace AuNoty
 
                     wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
+                    //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
+                    //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
+                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
+                    //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
+
                     strColor = "#29ba7b";
 
                     richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
@@ -254,10 +259,10 @@ namespace AuNoty
 
 
                     if (
-                        (wytnij(tekst, "<type>", "</type>") != "err") &&
-                        (wytnij(tekst, "<caption>", "</caption>") != "err") &&
-                        (wytnij(tekst, "<txt>", "</txt>") != "err") &&
-                        (wytnij(tekst, "<stime>", "</stime>") != "err"))
+                        (wytnij(tekst, "<type>", "</type>") != "error") &&
+                        (wytnij(tekst, "<caption>", "</caption>") != "error") &&
+                        (wytnij(tekst, "<txt>", "</txt>") != "error") &&
+                        (wytnij(tekst, "<stime>", "</stime>") != "error"))
                         w.Write("<msg>ok</msg>");
                     else
                         w.Write("<msg>nok</msg>" + tekst);
@@ -279,12 +284,12 @@ namespace AuNoty
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
-                    if (wytnij(tekst, "<caption>", "</caption>") != "err")
+                    if (wytnij(tekst, "<caption>", "</caption>") != "error")
                     {
                         textBox1.Invoke((Action)(() => textBox1.Text = "  " + wytnij(tekst, "<caption>", "</caption>")));
                     }
 
-                    if (wytnij(tekst, "<type>", "</type>") != "err")
+                    if (wytnij(tekst, "<type>", "</type>") != "error")
                     {
                         if (wytnij(tekst, "<type>", "</type>") == "inf")
                         {
