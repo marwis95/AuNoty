@@ -142,6 +142,7 @@ namespace AuNoty
 
         public void wyswietl(RichTextBox o, string tekst)
         {
+            o.Invoke((Action)(() => o.Clear() ));
             o.Invoke((Action)(() => o.Focus() ));
             o.Invoke((Action)(() => o.AppendText(tekst) ));
             o.Invoke((Action)(() => o.ScrollToCaret() ));
@@ -250,12 +251,7 @@ namespace AuNoty
                     //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
                     //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
                     //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                    //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"));
-
-                    strColor = "#29ba7b";
-
-                    richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
-                    wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+                    //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"))
 
 
                     if (
@@ -266,6 +262,7 @@ namespace AuNoty
                         w.Write("<msg>ok</msg>");
                     else
                         w.Write("<msg>nok</msg>" + tekst);
+
 
 
                     color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
@@ -283,6 +280,13 @@ namespace AuNoty
 
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+
+
+                    strColor = "#29ba7b";
+
+                    //richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
+                    wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+
 
                     if (wytnij(tekst, "<caption>", "</caption>") != "error")
                     {
@@ -319,7 +323,8 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.BackColor = color));
                     }
 
-                    pokażProgramToolStripMenuItem.Enabled = true;
+                    //richTextBox1.Invoke((Action)(() =>  pokażProgramToolStripMenuItem.Enabled = true));
+                    
 
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")
                     {
@@ -377,9 +382,9 @@ namespace AuNoty
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form2 f = new Form2("123");
-            f.ShowDialog();
-            //Application.Exit();
+            //Form2 f = new Form2("123");
+            //f.ShowDialog();
+            Application.Exit();
         }
 
         private void button2_Click(object sender, EventArgs e)
