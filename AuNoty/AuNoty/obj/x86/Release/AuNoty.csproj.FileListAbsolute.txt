@@ -2,9 +2,9 @@ C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\bin\Rele
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\bin\Release\AuNoty.pdb
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\ResolveAssemblyReference.cache
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Form1.resources
-C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Form2.resources
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Properties.Resources.resources
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.exe
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.pdb
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Form2.resources

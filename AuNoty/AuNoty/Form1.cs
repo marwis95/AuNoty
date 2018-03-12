@@ -372,7 +372,9 @@ namespace AuNoty
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Form2 f = new Form2("123");
+            f.ShowDialog();
+            //Application.Exit();
         }
 
         private void button2_Click(object sender, EventArgs e)

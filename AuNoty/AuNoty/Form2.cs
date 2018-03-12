@@ -14,24 +14,17 @@ namespace AuNoty
         public Form2(string strEdit)
         {
             InitializeComponent();
-            richTextBox1.AppendText(strEdit);
+           
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+            textBox1.PasswordChar = '*';   
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            base.OnFormClosing(e);
-            MessageBox.Show(e.CloseReason.ToString());
 
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                this.DialogResult = DialogResult.OK;
-
-            }
         }
     }
 }
