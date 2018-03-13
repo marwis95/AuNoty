@@ -314,7 +314,7 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.BackColor = color));
                     }
 
-                    //richTextBox1.Invoke((Action)(() =>  pokażProgramToolStripMenuItem.Enabled = true));
+                    richTextBox1.Invoke((Action)(() =>  pokażProgramToolStripMenuItem.Enabled = true));
                     
 
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")

@@ -19,6 +19,7 @@ namespace AuNoty
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height); 
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;  
         }
 
