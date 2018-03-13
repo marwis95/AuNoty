@@ -265,24 +265,15 @@ namespace AuNoty
 
 
 
-                    color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
-                    this.Invoke((Action)(() => this.BackColor = color));
-                    this.Invoke((Action)(() => this.TopMost = true));
-                    this.Invoke((Action)(() => this.Visible = true));
-                    this.Invoke((Action)(() => notifyIcon1.Visible = false));
+                    //color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
 
-                    this.Invoke((Action)(() =>
-                    this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
-                    counter = 0;
-                    this.Invoke((Action)(() => timer1.Interval = 2));
-                    this.Invoke((Action)(() => timer1.Start()));
 
 
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
 
-                    strColor = "#29ba7b";
+                    //strColor = "#29ba7b";
 
                     //richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
                     wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
@@ -335,6 +326,18 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.timer2.Start()));
                     }
 
+                    this.Invoke((Action)(() => this.BackColor = color));
+                    this.Invoke((Action)(() => this.TopMost = true));
+                    this.Invoke((Action)(() => this.Visible = true));
+                    this.Invoke((Action)(() => notifyIcon1.Visible = false));
+
+                    this.Invoke((Action)(() =>
+                    this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
+                    counter = 0;
+                    this.Invoke((Action)(() => timer1.Interval = 2));
+                    this.Invoke((Action)(() => timer1.Start()));
+
+
                 }
             }
             catch (IOException a)
@@ -382,9 +385,9 @@ namespace AuNoty
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Form2 f = new Form2("123");
-            //f.ShowDialog();
-            Application.Exit();
+            Form2 f = new Form2("123");
+            f.ShowDialog();
+            //Application.Exit();
         }
 
         private void button2_Click(object sender, EventArgs e)
