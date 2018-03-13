@@ -505,6 +505,13 @@ namespace AuNoty
                 MessageBox.Show("Disconnected");
             }
         }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.ShowDialog();
+
+        }
          
     }
 }
