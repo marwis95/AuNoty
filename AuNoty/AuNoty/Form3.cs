@@ -13,6 +13,7 @@ namespace AuNoty
     public partial class Form3 : Form
     {
         public String tekst;
+        public String oldPass;
 
         public Form3()
         {
@@ -56,12 +57,26 @@ namespace AuNoty
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            try
+            {   
+                using (StreamReader sr = new StreamReader("txt.txt"))
+                {
+                    oldPass = sr.ReadToEnd();
+                }
+            }
+            catch (Exception a)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(a.Message);
+            }
+
+            oldPass = decode(oldPass);
+            //MessageBox.Show(oldPass);
+
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
             textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
             textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -70,8 +85,14 @@ namespace AuNoty
             //MessageBox.Show(decode("qwe"));
             //MessageBox.Show(decode(encode("qwe")));
 
-            if((textBox2.Text == textBox3.Text) && ( (textBox1.Text == "Aumatic2018") || (textBox1.Text == "1") )){
+            if ((textBox2.Text == textBox3.Text) && ((textBox1.Text == "Aumatic2018") || (textBox1.Text == oldPass)))
+            {
                 File.WriteAllText("txt.txt", encode(textBox3.Text));
+                MessageBox.Show("Password changed");
+            }
+            else
+            {
+                MessageBox.Show("Error");
             }
 
         }
