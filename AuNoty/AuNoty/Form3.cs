@@ -73,7 +73,8 @@ namespace AuNoty
             oldPass = decode(oldPass);
             
 
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            this.Location = new Point((int)(Screen.PrimaryScreen.WorkingArea.Width * 0.5) - (int)(this.Width * 0.5), (int)(Screen.PrimaryScreen.WorkingArea.Height * 0.5) - (int)(this.Height * 0.5));
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
             textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
             textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
@@ -156,6 +157,20 @@ namespace AuNoty
         private void button4_MouseUp(object sender, MouseEventArgs e)
         {
             textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if ((textBox1.Text == "Aumatic2018") || (textBox1.Text == oldPass))
+            {
+                textBox2.Enabled = true;
+                textBox3.Enabled = true;
+            }
+            else
+            {
+                textBox2.Enabled = false;
+                textBox3.Enabled = false;
+            }
         }
     }
 }

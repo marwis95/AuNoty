@@ -408,7 +408,7 @@ namespace AuNoty
             this.Visible = true;
             if (visible == true)
             {
-                counter = this.Height -1 ;
+                counter = this.Height -5 ;
             }
             if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
             {

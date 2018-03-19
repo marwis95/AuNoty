@@ -8,3 +8,4 @@ C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.exe
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.pdb
 C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Form2.resources
+C:\Users\plc\Documents\Visual Studio 2010\Projects\AuNoty\AuNoty\AuNoty\obj\x86\Release\AuNoty.Form3.resources

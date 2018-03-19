@@ -39,7 +39,9 @@ namespace AuNoty
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height); 
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height); 
+            this.Location = new Point((int)(Screen.PrimaryScreen.WorkingArea.Width * 0.5) - (int)(this.Width * 0.5), (int)(Screen.PrimaryScreen.WorkingArea.Height * 0.5) - (int)(this.Height * 0.5));
+           
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
 
             try
@@ -64,18 +66,7 @@ namespace AuNoty
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
-            }
-            else
-            {
-                textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
-            }
-            textBox1.Focus();
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

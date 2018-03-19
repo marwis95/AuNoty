@@ -38,7 +38,6 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pokażProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sprawdzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zakończToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
@@ -101,11 +100,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pokażProgramToolStripMenuItem,
-            this.sprawdzToolStripMenuItem,
             this.optionsToolStripMenuItem,
             this.zakończToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 100);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 76);
             // 
             // pokażProgramToolStripMenuItem
             // 
@@ -114,13 +112,6 @@
             this.pokażProgramToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.pokażProgramToolStripMenuItem.Text = "Last Message";
             this.pokażProgramToolStripMenuItem.Click += new System.EventHandler(this.pokażProgramToolStripMenuItem_Click);
-            // 
-            // sprawdzToolStripMenuItem
-            // 
-            this.sprawdzToolStripMenuItem.Name = "sprawdzToolStripMenuItem";
-            this.sprawdzToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
-            this.sprawdzToolStripMenuItem.Text = "Status";
-            this.sprawdzToolStripMenuItem.Click += new System.EventHandler(this.sprawdzToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -149,6 +140,7 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
@@ -215,6 +207,7 @@
             // 
             // timer3
             // 
+            this.timer3.Interval = 1000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // Form1
@@ -267,7 +260,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ToolStripMenuItem sprawdzToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.Timer timer3;
     }
