@@ -155,7 +155,8 @@ namespace AuNoty
             
 
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "AuNoty";
+            //notifyIcon1.Text = "AuNoty (Dissconnected)";
+            timer3.Start();
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -175,7 +176,7 @@ namespace AuNoty
                 this.DialogResult = DialogResult.OK;
                 e.Cancel = true;
                 notifyIcon1.Visible = true;
-                notifyIcon1.Text = "AuNoty";
+                //notifyIcon1.Text = "AuNoty";
                 notifyIcon1.Icon = this.Icon;
                 notifyIcon1.ContextMenuStrip = contextMenuStrip1;
                 this.ShowInTaskbar = false;
@@ -329,7 +330,7 @@ namespace AuNoty
                     this.Invoke((Action)(() => this.BackColor = color));
                     this.Invoke((Action)(() => this.TopMost = true));
                     this.Invoke((Action)(() => this.Visible = true));
-                    this.Invoke((Action)(() => notifyIcon1.Visible = false));
+                    //this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
                     this.Invoke((Action)(() =>
                     this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
@@ -351,7 +352,7 @@ namespace AuNoty
             polaczenie.RunWorkerAsync();
 
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "AuNoty";
+            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.Invoke((Action)(() => this.ShowInTaskbar = false));
@@ -361,7 +362,7 @@ namespace AuNoty
         private void button1_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "AuNoty";
+            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -374,7 +375,7 @@ namespace AuNoty
             //this.ShowInTaskbar = true;
             this.TopMost = true;
             //this.Visible = true;
-            notifyIcon1.Visible = false;
+            //notifyIcon1.Visible = false;
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
 
@@ -480,7 +481,7 @@ namespace AuNoty
         private void button3_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = true;
-            notifyIcon1.Text = "AuNoty";
+            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -511,6 +512,18 @@ namespace AuNoty
             Form3 f3 = new Form3();
             f3.ShowDialog();
 
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            if (checkConn(klient) == true)
+            {
+                notifyIcon1.Text = "AuNoty (Connected)";
+            }
+            else
+            {
+                notifyIcon1.Text = "AuNoty (Disconnected)";
+            }
         }
          
     }

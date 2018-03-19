@@ -71,7 +71,7 @@ namespace AuNoty
             }
 
             oldPass = decode(oldPass);
-            //MessageBox.Show(oldPass);
+            
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
@@ -126,20 +126,36 @@ namespace AuNoty
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+
+        private void button2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (checkBox1.Checked == true)
-            {
-                textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
-                textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
-                textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
-            }
-            else
-            {
-                textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
-                textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
-                textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
-            }
+            textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
+        }
+
+        private void button2_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
+        }
+
+        private void button3_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
+        }
+
+        private void button3_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBox2.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
+        }
+
+        private void button4_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.No.Password;
+        }
+
+        private void button4_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBox3.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
         }
     }
 }
