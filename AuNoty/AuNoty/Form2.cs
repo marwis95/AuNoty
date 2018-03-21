@@ -35,17 +35,15 @@ namespace AuNoty
             }
 
             return s;
-        }
+        } //Funkcja dekodująca hasło
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height); 
             this.Location = new Point((int)(Screen.PrimaryScreen.WorkingArea.Width * 0.5) - (int)(this.Width * 0.5), (int)(Screen.PrimaryScreen.WorkingArea.Height * 0.5) - (int)(this.Height * 0.5));
-           
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
 
             try
-            {
+            {//Odczyt hasła z pliku
                 using (StreamReader sr = new StreamReader("txt.txt"))
                 {
                     passFromFile = sr.ReadToEnd();
@@ -58,12 +56,6 @@ namespace AuNoty
             }
 
             passFromFile = decode(passFromFile);
-            //MessageBox.Show(passFromFile);
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-
         }
 
 
@@ -76,7 +68,7 @@ namespace AuNoty
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if ((textBox1.Text == "Aumatic2018")||(textBox1.Text == passFromFile))
-            {
+            {//jeżeli zostanie wprowadzone hasło mozna zakończyć aplikacje
                 button1.Enabled = true;
             }
         }
