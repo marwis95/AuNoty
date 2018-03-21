@@ -79,7 +79,7 @@ namespace AuNoty
         public bool checkMessage = false;
         public bool visible = false;
 
-
+       
 
 
         private void WorkClick(object state)
@@ -148,7 +148,7 @@ namespace AuNoty
             o.Invoke((Action)(() => o.Focus() ));
             o.Invoke((Action)(() => o.AppendText(tekst) ));
             o.Invoke((Action)(() => o.ScrollToCaret() ));
-            txtWysylanie.Focus();
+            //txtWysylanie.Focus();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -157,7 +157,7 @@ namespace AuNoty
             
 
             notifyIcon1.Visible = true;
-            //notifyIcon1.Text = "AuNoty (Dissconnected)";
+
             timer3.Start();
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
@@ -165,7 +165,6 @@ namespace AuNoty
             this.Visible = false;
             
             polaczenie.RunWorkerAsync();
-            //MessageBox.Show("czekam na połaczenie");
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -196,7 +195,7 @@ namespace AuNoty
         private void polaczenie_DoWork(object sender, DoWorkEventArgs e)
         {
             //txtLog.SelectionFont = new Font(txtLog.Font, FontStyle.Bold);
-            wyswietl(txtLog, "Czekam na połaczenie\n");
+            //wyswietl(txtLog, "Czekam na połaczenie\n");
             listener = new TcpListener(8000);
             listener.Start();
             while (!listener.Pending())
@@ -211,7 +210,7 @@ namespace AuNoty
                 }
             }
             klient = listener.AcceptTcpClient();
-            wyswietl(txtLog, "Zarządano połączenia\n");
+            //wyswietl(txtLog, "Zarządano połączenia\n");
             NetworkStream stream = klient.GetStream();
             w = new BinaryWriter(stream);
             r = new BinaryReader(stream);
@@ -219,13 +218,13 @@ namespace AuNoty
             if (r.ReadString() == KomunikatyKlienta.Zadaj)
             {
                 w.Write(KomunikatySerwera.OK);
-                wyswietl(txtLog, "Połczono\n");
+                //wyswietl(txtLog, "Połczono\n");
                 czypolaczono = true;
                 odbieranie.RunWorkerAsync();
             }
             else
             {
-                wyswietl(txtLog, "Klient odrzucony\nRozlaczono\n");
+                //wyswietl(txtLog, "Klient odrzucony\nRozlaczono\n");
                 if (klient != null) klient.Close();
                 listener.Stop();
                 czypolaczono = false;
@@ -250,7 +249,7 @@ namespace AuNoty
 
 
 
-                    wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
+                   // wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
 
                     if (
@@ -335,7 +334,7 @@ namespace AuNoty
                         this.Invoke((Action)(() => 
                         //MessageBox.Show("Forma wyciagnieta");
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height)));
-
+                        this.richTextBox2.Focus();
                         
                     }else{//forma schowana
                         this.Invoke((Action)(() =>
@@ -344,6 +343,7 @@ namespace AuNoty
                         //this.Invoke((Action)(() => timer1.Stop()));
                         this.Invoke((Action)(() => timer1.Interval = 2));
                         this.Invoke((Action)(() => timer1.Start()));
+                        this.Invoke((Action)(() => this.richTextBox2.Focus()));
                     }
 
 
@@ -353,7 +353,7 @@ namespace AuNoty
             {
 
             }
-            wyswietl(txtLog, "Rozlaczono\n");
+            //wyswietl(txtLog, "Rozlaczono\n");
             czypolaczono = false;
             klient.Close();
             listener.Stop();
@@ -369,7 +369,6 @@ namespace AuNoty
         private void button1_Click(object sender, EventArgs e)
         {
             notifyIcon1.Visible = true;
-            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -380,8 +379,6 @@ namespace AuNoty
         {
             this.ShowInTaskbar = true;
             this.Visible = true;
-            //notifyIcon1.Visible = false;
-
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
 
             counter = 0;
@@ -393,7 +390,6 @@ namespace AuNoty
         {
             Form2 f = new Form2("123");
             f.ShowDialog();
-            //Application.Exit();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -466,7 +462,8 @@ namespace AuNoty
             this.Height = richTextBox1.Height + 90;
             richTextBox1.Location = new Point(richTextBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * richTextBox1.Height)) + 10);
             pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
-            label1.Focus();
+            
+            this.richTextBox2.Focus();
             
 
         }
@@ -484,10 +481,9 @@ namespace AuNoty
         private void button3_Click(object sender, EventArgs e)
         {
             this.Invoke((Action)(() =>
-           this.Location = new Point(10000, 10000)));
+            this.Location = new Point(10000, 10000)));
                         
             notifyIcon1.Visible = true;
-            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
@@ -502,7 +498,6 @@ namespace AuNoty
 
         private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(checkConn(klient).ToString());
             if (checkConn(klient) == true)
             {
                 MessageBox.Show("Connected");
@@ -530,6 +525,11 @@ namespace AuNoty
             {
                 notifyIcon1.Text = "AuNoty (Disconnected)";
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            richTextBox2.Focus();
         }
          
     }
