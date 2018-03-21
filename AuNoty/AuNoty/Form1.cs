@@ -80,6 +80,8 @@ namespace AuNoty
         public bool visible = false;
 
 
+
+
         private void WorkClick(object state)
         {
             this.context.Send(new SendOrPostCallback(delegate(object _state)
@@ -199,6 +201,7 @@ namespace AuNoty
             listener.Start();
             while (!listener.Pending())
             {
+                Thread.Sleep(100);
                 if (this.polaczenie.CancellationPending)
                 {
                     if (klient != null) klient.Close();
@@ -327,15 +330,18 @@ namespace AuNoty
 
                     //MessageBox.Show(Screen.PrimaryScreen.WorkingArea.Height.ToString());
 
-                    if (this.Location.Y < Screen.PrimaryScreen.WorkingArea.Height)
+                    if ((this.Location.Y < Screen.PrimaryScreen.WorkingArea.Height) || (timer1.Enabled == true))
                     {
+                        this.Invoke((Action)(() => 
                         //MessageBox.Show("Forma wyciagnieta");
+                        this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height)));
+
                         
                     }else{//forma schowana
                         this.Invoke((Action)(() =>
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
                         counter = 0;
-                        this.Invoke((Action)(() => timer1.Stop()));
+                        //this.Invoke((Action)(() => timer1.Stop()));
                         this.Invoke((Action)(() => timer1.Interval = 2));
                         this.Invoke((Action)(() => timer1.Start()));
                     }
@@ -372,10 +378,8 @@ namespace AuNoty
 
         private void pokażProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            visible = true;
-            //this.ShowInTaskbar = true;
-            this.TopMost = true;
-            //this.Visible = true;
+            this.ShowInTaskbar = true;
+            this.Visible = true;
             //notifyIcon1.Visible = false;
 
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
@@ -432,6 +436,8 @@ namespace AuNoty
             this.Visible = false;
             visible = false;
             timer2.Stop();
+            this.Invoke((Action)(() =>
+            this.Location = new Point(10000, 10000)));
 
             if (checkConn(klient) == true)
             {
@@ -455,12 +461,13 @@ namespace AuNoty
             richTextBox1.SelectAll();
             richTextBox1.SelectionColor = Color.White;
             richTextBox1.DeselectAll();
-
+            
 
             this.Height = richTextBox1.Height + 90;
             richTextBox1.Location = new Point(richTextBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * richTextBox1.Height)) + 10);
             pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
-
+            label1.Focus();
+            
 
         }
 

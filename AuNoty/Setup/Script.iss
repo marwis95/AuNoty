@@ -65,6 +65,7 @@ Source: "..\AuNoty\bin\Release\error.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\info.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\warning.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\question.png"; DestDir: "{app}"
+Source: "..\AuNoty\bin\Release\txt.txt"; DestDir: "{app}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
