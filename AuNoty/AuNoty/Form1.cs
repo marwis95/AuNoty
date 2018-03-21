@@ -249,11 +249,6 @@ namespace AuNoty
 
                     wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
 
-                    //MessageBox.Show(wytnij(tekst, "<type>", "</type>"));
-                    //MessageBox.Show(wytnij(tekst, "<caption>", "</caption>"));
-                    //MessageBox.Show(wytnij(tekst, "<txt>", "</txt>"));
-                    //MessageBox.Show(wytnij(tekst, "<stime>", "</stime>"))
-
 
                     if (
                         (wytnij(tekst, "<type>", "</type>") != "error") &&
@@ -266,7 +261,6 @@ namespace AuNoty
 
 
 
-                    //color = System.Drawing.ColorTranslator.FromHtml("#29ba7b");
 
 
 
@@ -274,9 +268,7 @@ namespace AuNoty
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
 
-                    //strColor = "#29ba7b";
 
-                    //richTextBox1.Invoke((Action)(() => richTextBox1.Clear()));
                     wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
 
 
@@ -315,13 +307,15 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.BackColor = color));
                     }
 
-                    richTextBox1.Invoke((Action)(() =>  pokażProgramToolStripMenuItem.Enabled = true));
+                    if (pokażProgramToolStripMenuItem.Enabled == false)
+                    {
+                        richTextBox1.Invoke((Action)(() => pokażProgramToolStripMenuItem.Enabled = true));
+                    }
                     
 
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")
                     {
                         int time = Int32.Parse(wytnij(tekst, "<stime>", "</stime>"));
-                        //MessageBox.Show(time.ToString());
                         this.Invoke((Action)(() => this.timer2.Stop()));
                         this.Invoke((Action)(() => this.timer2.Interval = time * 1000));
                         this.Invoke((Action)(() => this.timer2.Start()));
@@ -330,13 +324,21 @@ namespace AuNoty
                     this.Invoke((Action)(() => this.BackColor = color));
                     this.Invoke((Action)(() => this.TopMost = true));
                     this.Invoke((Action)(() => this.Visible = true));
-                    //this.Invoke((Action)(() => notifyIcon1.Visible = false));
 
-                    this.Invoke((Action)(() =>
-                    this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
-                    counter = 0;
-                    this.Invoke((Action)(() => timer1.Interval = 2));
-                    this.Invoke((Action)(() => timer1.Start()));
+                    //MessageBox.Show(Screen.PrimaryScreen.WorkingArea.Height.ToString());
+
+                    if (this.Location.Y < Screen.PrimaryScreen.WorkingArea.Height)
+                    {
+                        //MessageBox.Show("Forma wyciagnieta");
+                        
+                    }else{//forma schowana
+                        this.Invoke((Action)(() =>
+                        this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
+                        counter = 0;
+                        this.Invoke((Action)(() => timer1.Stop()));
+                        this.Invoke((Action)(() => timer1.Interval = 2));
+                        this.Invoke((Action)(() => timer1.Start()));
+                    }
 
 
                 }
@@ -352,7 +354,6 @@ namespace AuNoty
             polaczenie.RunWorkerAsync();
 
             notifyIcon1.Visible = true;
-            //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.Invoke((Action)(() => this.ShowInTaskbar = false));
@@ -405,21 +406,16 @@ namespace AuNoty
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.Visible = true;
-            if (visible == true)
-            {
-                counter = this.Height -5 ;
-            }
+
             if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
             {
-                counter++;
+                counter+=5;
                 this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - counter);
 
             }
             else
             {
                 timer1.Stop();
-                visible = true;
             }
 
 
@@ -480,6 +476,9 @@ namespace AuNoty
 
         private void button3_Click(object sender, EventArgs e)
         {
+            this.Invoke((Action)(() =>
+           this.Location = new Point(10000, 10000)));
+                        
             notifyIcon1.Visible = true;
             //notifyIcon1.Text = "AuNoty";
             notifyIcon1.Icon = this.Icon;
