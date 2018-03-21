@@ -102,13 +102,13 @@ namespace AuNoty
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                 }
-                else //if (action.Type.Equals(ClickType.rightClick))
+                else 
                 {
                     mouse_event(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
                 }
             }), state);
-        }
+        } //funkcja symulująca klinięcie myszą
 
         public string wytnij(String txt, string start, string end)
         {
@@ -120,7 +120,7 @@ namespace AuNoty
             {
                 return "error";
             }
-        }
+        } //wyłuskiwanie wiadomości z tagów
 
         public bool checkConn(TcpClient k)
         {
@@ -139,8 +139,7 @@ namespace AuNoty
             {
                 return false;
             }
-        }
-
+        } //sprawdzanie czy jest połączenie TCP
 
         public void wyswietl(RichTextBox o, string tekst)
         {
@@ -148,56 +147,33 @@ namespace AuNoty
             o.Invoke((Action)(() => o.Focus() ));
             o.Invoke((Action)(() => o.AppendText(tekst) ));
             o.Invoke((Action)(() => o.ScrollToCaret() ));
-            //txtWysylanie.Focus();
-        }
+        } //funkcja wpisująca tekst do RTB
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            timer3.Start(); //Uruchomienie timera odpowiedzialnego za monitorowanie stanu połączenia
+
+            #region Formatuj Form1
+
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            
-
             notifyIcon1.Visible = true;
-
-            timer3.Start();
             notifyIcon1.Icon = this.Icon;
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.ShowInTaskbar = false;
             this.Visible = false;
+
+            #endregion //formatowanie Form1
             
-            polaczenie.RunWorkerAsync();
+            polaczenie.RunWorkerAsync(); //Uruchomienie wątku nasłuchującego
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            //MessageBox.Show(e.CloseReason.ToString());
 
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                this.DialogResult = DialogResult.OK;
-                e.Cancel = true;
-                notifyIcon1.Visible = true;
-                //notifyIcon1.Text = "AuNoty";
-                notifyIcon1.Icon = this.Icon;
-                notifyIcon1.ContextMenuStrip = contextMenuStrip1;
-                this.ShowInTaskbar = false;
-                this.Visible = false;
-
-
-
-                w.Write("CLOSED");
-
-
-
-            }
-        }
 
         private void polaczenie_DoWork(object sender, DoWorkEventArgs e)
         {
-            //txtLog.SelectionFont = new Font(txtLog.Font, FontStyle.Bold);
-            //wyswietl(txtLog, "Czekam na połaczenie\n");
             listener = new TcpListener(8000);
             listener.Start();
+
             while (!listener.Pending())
             {
                 Thread.Sleep(100);
@@ -209,8 +185,8 @@ namespace AuNoty
                     return;
                 }
             }
+
             klient = listener.AcceptTcpClient();
-            //wyswietl(txtLog, "Zarządano połączenia\n");
             NetworkStream stream = klient.GetStream();
             w = new BinaryWriter(stream);
             r = new BinaryReader(stream);
@@ -218,13 +194,11 @@ namespace AuNoty
             if (r.ReadString() == KomunikatyKlienta.Zadaj)
             {
                 w.Write(KomunikatySerwera.OK);
-                //wyswietl(txtLog, "Połczono\n");
                 czypolaczono = true;
                 odbieranie.RunWorkerAsync();
             }
             else
             {
-                //wyswietl(txtLog, "Klient odrzucony\nRozlaczono\n");
                 if (klient != null) klient.Close();
                 listener.Stop();
                 czypolaczono = false;
@@ -240,16 +214,14 @@ namespace AuNoty
             {
                 while (((tekst = r.ReadString()) != KomunikatyKlienta.Rozlacz) && (checkConn(klient) == true))
                 {
+
                     System.Text.Encoding utf_8 = System.Text.Encoding.UTF8;
                     string s_unicode = tekst;
                     byte[] utf8Bytes = System.Text.Encoding.UTF8.GetBytes(s_unicode);
                     string s_unicode2 = System.Text.Encoding.UTF8.GetString(utf8Bytes);
-
                     tekst=s_unicode2;
 
-
-
-                   // wyswietl(txtLog, "===== Rozmówca =====\n" + tekst + '\n');
+                    //Formatowanie Stringa na UTF8
 
 
                     if (
@@ -261,18 +233,18 @@ namespace AuNoty
                     else
                         w.Write("<msg>nok</msg>" + tekst);
 
-
-
-
+                    //Sprawdzanie poprawności stringa
 
 
                     mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                     mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 
+                    //Generowanie kliknięcia myszą w calu schowania notification area
 
+                    #region Napis_Kolor_Caption_Time
 
                     wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
-
+                    
 
                     if (wytnij(tekst, "<caption>", "</caption>") != "error")
                     {
@@ -308,11 +280,6 @@ namespace AuNoty
                         richTextBox1.Invoke((Action)(() => richTextBox1.BackColor = color));
                         this.Invoke((Action)(() => this.BackColor = color));
                     }
-
-                    if (pokażProgramToolStripMenuItem.Enabled == false)
-                    {
-                        richTextBox1.Invoke((Action)(() => pokażProgramToolStripMenuItem.Enabled = true));
-                    }
                     
 
                     if (wytnij(tekst, "<stime>", "</stime>") != "0")
@@ -327,20 +294,24 @@ namespace AuNoty
                     this.Invoke((Action)(() => this.TopMost = true));
                     this.Invoke((Action)(() => this.Visible = true));
 
-                    //MessageBox.Show(Screen.PrimaryScreen.WorkingArea.Height.ToString());
+                    #endregion //
+
+
+                    if (pokażProgramToolStripMenuItem.Enabled == false)
+                    {//włączenie przycisku Last Message
+                        richTextBox1.Invoke((Action)(() => pokażProgramToolStripMenuItem.Enabled = true));
+                    }
 
                     if ((this.Location.Y < Screen.PrimaryScreen.WorkingArea.Height) || (timer1.Enabled == true))
-                    {
+                    {//jeśli forma odkryta
                         this.Invoke((Action)(() => 
-                        //MessageBox.Show("Forma wyciagnieta");
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height)));
                         this.richTextBox2.Focus();
                         
-                    }else{//forma schowana
+                    }else{//jeśli forma schowana
                         this.Invoke((Action)(() =>
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
                         counter = 0;
-                        //this.Invoke((Action)(() => timer1.Stop()));
                         this.Invoke((Action)(() => timer1.Interval = 2));
                         this.Invoke((Action)(() => timer1.Start()));
                         this.Invoke((Action)(() => this.richTextBox2.Focus()));
@@ -353,7 +324,6 @@ namespace AuNoty
             {
 
             }
-            //wyswietl(txtLog, "Rozlaczono\n");
             czypolaczono = false;
             klient.Close();
             listener.Stop();
@@ -364,19 +334,13 @@ namespace AuNoty
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
             this.Invoke((Action)(() => this.ShowInTaskbar = false));
             this.Invoke((Action)(() =>  this.Visible = false));
+            //W przypadku utraty połączenia schowaj form1 u ustaw nasłuch
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            notifyIcon1.Visible = true;
-            notifyIcon1.Icon = this.Icon;
-            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
-            this.ShowInTaskbar = false;
-            this.Visible = false;
-        }
+
 
         private void pokażProgramToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {//button pokaż ostatnią wiadomość
             this.ShowInTaskbar = true;
             this.Visible = true;
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height);
@@ -387,25 +351,16 @@ namespace AuNoty
         }
 
         private void zakończToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {//button otwierający form2 z zapytaniem o hasło aby wyłączyć program
             Form2 f = new Form2("123");
             f.ShowDialog();
+            Console.WriteLine("Otwieram form 2");
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form2 f = new Form2("123");
-            if (f.ShowDialog() == DialogResult.OK) {
-                MessageBox.Show("ok");
-            
-            }
-            ;
-            
-            
-        }
+
 
         private void timer1_Tick(object sender, EventArgs e)
-        {
+        {//timer obslugujący wysuwanie form1
 
             if (this.Location.Y > Screen.PrimaryScreen.WorkingArea.Height - this.Height)
             {
@@ -422,7 +377,7 @@ namespace AuNoty
         }
 
         private void timer2_Tick(object sender, EventArgs e)
-        {
+        {//timer odpowiadający za schowanie form1 kiedy skończy się czas jej wyświetlania
             this.TopMost = true;
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "AuNoty";
@@ -443,7 +398,7 @@ namespace AuNoty
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
+        {//dostosowywanie wysokości RTB wg. ilości linii
             
             using (Graphics g = CreateGraphics())
             {
@@ -479,7 +434,7 @@ namespace AuNoty
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {//button do chowania form1 
             this.Invoke((Action)(() =>
             this.Location = new Point(10000, 10000)));
                         
@@ -496,27 +451,16 @@ namespace AuNoty
             }
         }
 
-        private void sprawdzToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (checkConn(klient) == true)
-            {
-                MessageBox.Show("Connected");
-            }
-            else
-            {
-                MessageBox.Show("Disconnected");
-            }
-        }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {//Wywołanie form3 z opcjami
             Form3 f3 = new Form3();
             f3.ShowDialog();
 
         }
 
         private void timer3_Tick(object sender, EventArgs e)
-        {
+        {//Timer sprawdzający status połączenia
             if (checkConn(klient) == true)
             {
                 notifyIcon1.Text = "AuNoty (Connected)";
@@ -527,10 +471,7 @@ namespace AuNoty
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            richTextBox2.Focus();
-        }
+   
          
     }
 }

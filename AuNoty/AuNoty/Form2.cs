@@ -58,7 +58,7 @@ namespace AuNoty
             }
 
             passFromFile = decode(passFromFile);
-            MessageBox.Show(passFromFile);
+            //MessageBox.Show(passFromFile);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
