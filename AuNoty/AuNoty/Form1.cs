@@ -163,6 +163,7 @@ namespace AuNoty
             this.Visible = false;
 
             #endregion //formatowanie Form1
+
             
             polaczenie.RunWorkerAsync(); //Uruchomienie wątku nasłuchującego
         }
@@ -243,7 +244,10 @@ namespace AuNoty
 
                     #region Napis_Kolor_Caption_Time
 
-                    wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+                    //wyswietl(richTextBox1, wytnij(tekst, "<txt>", "</txt>"));
+                    //wyswietl(richTextBox2, wytnij(tekst, "<txt>", "</txt>"));
+
+                    richTextBox1.Invoke((Action)(() => richTextBox1.Text = wytnij(tekst, "<txt>", "</txt>")));
                     
 
                     if (wytnij(tekst, "<caption>", "</caption>") != "error")
@@ -306,8 +310,7 @@ namespace AuNoty
                     {//jeśli forma odkryta
                         this.Invoke((Action)(() => 
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height - this.Height)));
-                        this.richTextBox2.Focus();
-                        
+                        this.Invoke((Action)(() => this.richTextBox2.Focus()));
                     }else{//jeśli forma schowana
                         this.Invoke((Action)(() =>
                         this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - this.Width, Screen.PrimaryScreen.WorkingArea.Height)));
@@ -317,6 +320,7 @@ namespace AuNoty
                         this.Invoke((Action)(() => this.richTextBox2.Focus()));
                     }
 
+                    
 
                 }
             }
@@ -417,8 +421,8 @@ namespace AuNoty
             this.Height = richTextBox1.Height + 90;
             richTextBox1.Location = new Point(richTextBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * richTextBox1.Height)) + 10);
             pictureBox1.Location = new Point(pictureBox1.Location.X, ((int)(0.5 * (this.Height)) - (int)(0.5 * pictureBox1.Height)) +10 );
+
             
-            this.richTextBox2.Focus();
             
 
         }

@@ -173,10 +173,9 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(348, 59);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(74, 22);
+            this.richTextBox2.Size = new System.Drawing.Size(74, 0);
             this.richTextBox2.TabIndex = 10;
             this.richTextBox2.Text = "RTB_Hide";
-            this.richTextBox2.Visible = false;
             // 
             // Form1
             // 
