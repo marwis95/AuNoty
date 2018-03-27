@@ -34,6 +34,7 @@
 #define MyAppExeName "MyProg.exe"
 
 [Setup]
+PrivilegesRequired = admin     
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
@@ -60,23 +61,34 @@ Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Files]
-Source: "..\AuNoty\bin\Release\AuNoty.exe"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\error.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\info.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\warning.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\question.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\txt.txt"; DestDir: "{app}"
+Source: "..\AuNoty\bin\Release\AuNoty.exe"; DestDir: "{app}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\AuNoty"; Filename: "{app}\AuNoty.exe"
 
+[Tasks]
+Name: "TaskEntry"; Description: "Start  with Windows?"; GroupDescription: "Startup";
+
 
 [Registry]
-;Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletevalue
+;Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; 
+;Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNotyyy"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletekeyifempty
+
+;Root: HKLM; Subkey: "SOFTWARE\Wow6432Node\\Windows\CurrentVersion\Run"; Permissions: users-modify; \
+ ;   Flags: uninsdeletekey createvalueifdoesntexist; ValueType: string; \
+  ;  ValueName: "SOAPAddress"; ValueData: "ABC"
+
+ Root: HKLM; Subkey: "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run"; Permissions: users-modify; \
+    Flags: uninsdeletekey createvalueifdoesntexist; Tasks: TaskEntry; ValueType: string; \
+   ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""
 
 
- 
 [Code]
 // Next functions are used for proper working of Graphical Installer powered installer
 procedure InitializeWizard();
@@ -99,7 +111,7 @@ begin
 		if MsgBox('Uruchamiaj przy starcie systemu Windows', mbConfirmation, MB_YESNO) = IDYES then
 		begin
 		   RegWriteStringValue
-		   (HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Run','AuNoty', ExpandConstant('{app}\AuNoty.exe')); 
+		   (HKCU, 'SOFTWARE\Wow6432Node\Windows\CurrentVersion\Run','AuNoty', ExpandConstant('{app}\AuNoty.exe')); 
 		end;
 	  end;
   end;

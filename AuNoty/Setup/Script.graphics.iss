@@ -18,15 +18,15 @@
 #define public GraphicalInstallerUI "GraphicalInstallerUI"
  
 ; Texts colors
-#define public TextsColor    "$FFFFFF"
+#define public TextsColor    "$000000"
 #define public HeadersColor  "$FFFFFF"
-#define public InversedColor "$FFFFFF"
+#define public InversedColor "$000000"
  
 ; Buttons colors
-#define public ButtonNormalColor   "$000000"
-#define public ButtonFocusedColor  "$000000"
-#define public ButtonPressedColor  "$000000"
-#define public ButtonDisabledColor "$000000"
+#define public ButtonNormalColor   "$FFFFFF"
+#define public ButtonFocusedColor  "$FFFFFF"
+#define public ButtonPressedColor  "$FFFFFF"
+#define public ButtonDisabledColor "$FFFFFF"
  
 ; Images - all files must be in the same directory as this .iss file!
 #define public TopPicture    "Aunoty-top.png"    ; 690x416 px
