@@ -73,19 +73,19 @@ Source: "..\AuNoty\bin\Release\AuNoty.exe"; DestDir: "{app}"
 Name: "{group}\AuNoty"; Filename: "{app}\AuNoty.exe"
 
 [Tasks]
-Name: "TaskEntry"; Description: "Start  with Windows?"; GroupDescription: "Startup";
+Name: "TaskEntry"; Description: "Install for all users on this computer"; GroupDescription: "Please select whether you wish to make AuNoty available to all users, or just yourself";  Flags: exclusive;
+
+Name: "TaskEntry2"; Description: "Install for current user"; GroupDescription: "Please select whether you wish to make AuNoty available to all users, or just yourself"; Flags: exclusive unchecked;
+
 
 
 [Registry]
-;Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""; 
-;Root: HKLM; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "AuNotyyy"; ValueData: """{app}\AuNoty.exe"""; Flags: uninsdeletekeyifempty
+   Root: HKLM; Subkey: "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run"; Permissions: users-modify; \
+   Flags: uninsdeletekey createvalueifdoesntexist; Tasks: TaskEntry; ValueType: string; \
+   ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""
 
-;Root: HKLM; Subkey: "SOFTWARE\Wow6432Node\\Windows\CurrentVersion\Run"; Permissions: users-modify; \
- ;   Flags: uninsdeletekey createvalueifdoesntexist; ValueType: string; \
-  ;  ValueName: "SOAPAddress"; ValueData: "ABC"
-
- Root: HKLM; Subkey: "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run"; Permissions: users-modify; \
-    Flags: uninsdeletekey createvalueifdoesntexist; Tasks: TaskEntry; ValueType: string; \
+   Root: HKCU; Subkey: "SSOFTWARE\Microsoft\Windows\CurrentVersion\Run"; Permissions: users-modify; \
+   Flags: uninsdeletekey createvalueifdoesntexist; Tasks: TaskEntry2; ValueType: string; \
    ValueName: "AuNoty"; ValueData: """{app}\AuNoty.exe"""
 
 
