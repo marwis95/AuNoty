@@ -65,7 +65,7 @@ Source: "..\AuNoty\bin\Release\error.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\info.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\warning.png"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\question.png"; DestDir: "{app}"
-Source: "..\AuNoty\bin\Release\txt.txt"; DestDir: "{app}"
+Source: "..\AuNoty\bin\Release\AuNoty.txt"; DestDir: "{app}"
 Source: "..\AuNoty\bin\Release\AuNoty.exe"; DestDir: "{app}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
@@ -98,53 +98,7 @@ begin
     #endif
 end;
  
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
 
- 
-  //MsgBox(ExpandConstant('{language}'), mbInformation, MB_OK); 
-
-  if ExpandConstant('{language}') = 'polish' then
-  begin
-	  if CurStep = ssPostInstall then
-	  begin;
-		if MsgBox('Uruchamiaj przy starcie systemu Windows', mbConfirmation, MB_YESNO) = IDYES then
-		begin
-		   RegWriteStringValue
-		   (HKCU, 'SOFTWARE\Wow6432Node\Windows\CurrentVersion\Run','AuNoty', ExpandConstant('{app}\AuNoty.exe')); 
-		end;
-	  end;
-  end;
-
-
-
-  if ExpandConstant('{language}') = 'english' then
-  begin
-	  if CurStep = ssPostInstall then
-	  begin;
-		if MsgBox('Run on startup windows?', mbConfirmation, MB_YESNO) = IDYES then
-		begin
-		   RegWriteStringValue
-		   (HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Run','AuNoty', ExpandConstant('{app}\AuNoty.exe')); 
-		end;
-	  end;
-  end;
-
-
-    if ExpandConstant('{language}') = 'spanish' then
-  begin
-	  if CurStep = ssPostInstall then
-	  begin;
-		if MsgBox('Iniciar al inicio de Windows?', mbConfirmation, MB_YESNO) = IDYES then
-		begin
-		   RegWriteStringValue
-		   (HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Run','AuNoty', ExpandConstant('{app}\AuNoty.exe')); 
-		end;
-	  end;
-  end;
-
-
-end;
 
 procedure CurPageChanged(CurPageID: Integer);
 begin

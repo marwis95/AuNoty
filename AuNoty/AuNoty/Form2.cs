@@ -42,9 +42,11 @@ namespace AuNoty
             this.Location = new Point((int)(Screen.PrimaryScreen.WorkingArea.Width * 0.5) - (int)(this.Width * 0.5), (int)(Screen.PrimaryScreen.WorkingArea.Height * 0.5) - (int)(this.Height * 0.5));
             textBox1.UseSystemPasswordChar = PasswordPropertyTextAttribute.Yes.Password;
 
+
+
             try
             {//Odczyt hasła z pliku
-                using (StreamReader sr = new StreamReader("txt.txt"))
+                using (StreamReader sr = new StreamReader("C:/Program Files (x86)/Aumatic/AuNoty/AuNoty.txt"))
                 {
                     passFromFile = sr.ReadToEnd();
                 }
@@ -67,9 +69,13 @@ namespace AuNoty
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if ((textBox1.Text == "Aumatic2018")||(textBox1.Text == passFromFile))
+            if ((textBox1.Text == "Aumatic2018") || (textBox1.Text == passFromFile))
             {//jeżeli zostanie wprowadzone hasło mozna zakończyć aplikacje
                 button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
             }
         }
     }

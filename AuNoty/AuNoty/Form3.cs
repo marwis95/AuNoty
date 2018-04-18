@@ -59,7 +59,7 @@ namespace AuNoty
         {
             try
             {//odczyt starego hasła z pliku   
-                using (StreamReader sr = new StreamReader("txt.txt"))
+                using (StreamReader sr = new StreamReader("C:/Program Files (x86)/Aumatic/AuNoty/AuNoty.txt"))
                 {
                     oldPass = sr.ReadToEnd();
                 }
@@ -85,7 +85,7 @@ namespace AuNoty
 
             if ((textBox2.Text == textBox3.Text) && ((textBox1.Text == "Aumatic2018") || (textBox1.Text == oldPass)))
             {//jeżeli zostanie podane stare hasło oraz nowe to możliwa jest zmiana
-                File.WriteAllText("txt.txt", encode(textBox3.Text));
+                File.WriteAllText("C:/Program Files (x86)/Aumatic/AuNoty/AuNoty.txt", encode(textBox3.Text));
                 MessageBox.Show("Password changed");
             }
             else
